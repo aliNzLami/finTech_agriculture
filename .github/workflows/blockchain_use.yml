@@ -3,6 +3,9 @@ name: Process Blockchain Data
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - 'italy_case/**'
+      - '.github/workflows/blockchain_use.yml'
   workflow_dispatch:
 
 jobs:
@@ -31,5 +34,5 @@ jobs:
       with:
         name: blockchain-split-data
         path: |
-          blockchain_users.xlsx
-          blockchain_non_users.xlsx
+          italy_case/blockchain_users.xlsx
+          italy_case/blockchain_non_users.xlsx
