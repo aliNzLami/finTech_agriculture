@@ -1,8 +1,8 @@
 import pandas as pd
 
 # Load both files
-df_users = pd.read_excel("/italy_case/separateGroups/blockchain_users.xlsx")
-df_non_users = pd.read_excel("/italy_case/separateGroups/blockchain_non_users.xlsx")
+df_users = pd.read_excel("italy_case/separateGroups/blockchain_users.xlsx")
+df_non_users = pd.read_excel("italy_case/separateGroups/blockchain_non_users.xlsx")
 
 def get_summary(df, name):
     print(f"\n--- Profile: {name} ---")
