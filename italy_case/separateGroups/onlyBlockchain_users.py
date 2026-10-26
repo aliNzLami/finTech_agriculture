@@ -1,13 +1,12 @@
 import pandas as pd
 
-# Load the dataset (only blockchain users)
-df = pd.read_excel("italy_case/separateGroups/blockchain_users.xlsx")
+# Load the dataset (just the filename since we are already inside the folder)
+df = pd.read_excel("blockchain_users.xlsx")
 
 # Drop duplicates to get unique farmers (since DCE has 8 rows per person)
 unique_farmers = df.drop_duplicates(subset=['RID'])
 
 # Filter: IoT is NOT selected (1 = not selected)
-# We don't care about AI or Cloud here.
 target_group = unique_farmers[unique_farmers['q11_1iot'] == 1]
 
 # Save to a new Excel file
