@@ -2,9 +2,9 @@ import pandas as pd
 import os
 
 # Define file names
-input_file = "database.xlsx"
-output_users = "blockchain_users.xlsx"
-output_non_users = "blockchain_non_users.xlsx"
+input_file = "italy_case/database.xlsx"
+output_users = "italy_case/blockchain_users.xlsx"
+output_non_users = "italy_case/blockchain_non_users.xlsx"
 
 def process_data():
     # Check if the input file exists
