@@ -26,11 +26,12 @@ jobs:
         pip install pandas openpyxl
 
     - name: Run the analysis script
-      working-directory: 
-      run: python italy_case/separateGroups/onlyBlockchain_users.py
+      working-directory: ./italy_case/separateGroups
+      run: python onlyBlockchain_users.py
 
     - name: Upload output file
       uses: actions/upload-artifact@v4
+      if: always()
       with:
         name: blockchain-no-iot-data
         path: italy_case/separateGroups/blockchain_no_iot.xlsx
