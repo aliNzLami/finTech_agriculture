@@ -1,0 +1,39 @@
+name: Split Mobile vs ATM Users
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'findex/separatedGroups/**'
+  workflow_dispatch:
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pandas openpyxl
+
+    - name: Run the analysis script
+      working-directory: ./findex/separatedGroups
+      run: python split_mobile_vs_atm.py
+
+    - name: Upload output files
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: mobile-vs-atm-data
+        path: |
+          findex/separatedGroups/online_payment_users.xlsx
+          findex/separatedGroups/atm_users.xlsx
