@@ -1,9 +1,19 @@
 import pandas as pd
+import os
 
 def print_demographics():
     print("Loading datasets...")
-    df_account = pd.read_excel("agriculture_into_account.xlsx")
-    df_cash = pd.read_excel("agriculture_in_cash.xlsx")
+    
+    # Because the script runs inside 'separatedGroups', we just use the file names
+    file_account = "agriculture_into_account.xlsx"
+    file_cash = "agriculture_in_cash.xlsx"
+
+    if not os.path.exists(file_account) or not os.path.exists(file_cash):
+        print("Error: Excel files not found in this directory.")
+        return
+
+    df_account = pd.read_excel(file_account)
+    df_cash = pd.read_excel(file_cash)
 
     def calculate_stats(df, name):
         print(f"\n--- Profile: {name} ---")
