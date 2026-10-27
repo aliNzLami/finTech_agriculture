@@ -4,7 +4,7 @@ import zipfile
 
 # Define zip and output file names
 zip_file = "findex_data.xlsx.zip"
-input_file = "findex_data.xlsx.csv"
+input_file = "findex_data.xlsx.csv"  # Updated to the actual extracted file name
 output_account = "agriculture_into_account.xlsx"
 output_cash = "agriculture_in_cash.xlsx"
 
@@ -23,9 +23,9 @@ def split_findex_data():
         print(f"Error: Neither {zip_file} nor {input_file} found.")
         return
 
-    # 2. Load the extracted dataset
+    # 2. Load the extracted dataset using read_csv
     print(f"Loading {input_file}...")
-    df = pd.read_excel(input_file, engine='openpyxl')
+    df = pd.read_csv(input_file, low_memory=False)
 
     target_col = 'receive_agriculture'
     if target_col not in df.columns:
@@ -33,13 +33,9 @@ def split_findex_data():
         return
 
     # 3. Filter the data
-    # Drop rows with missing values for the target column
     df_clean = df.dropna(subset=[target_col])
-    
-    # Keep only values 1 (account) and 2 (cash)
     df_filtered = df_clean[df_clean[target_col].isin([1, 2])]
     
-    # Split into two groups
     df_account = df_filtered[df_filtered[target_col] == 1]
     df_cash = df_filtered[df_filtered[target_col] == 2]
 
@@ -47,7 +43,7 @@ def split_findex_data():
     df_account.to_excel(output_account, index=False)
     df_cash.to_excel(output_cash, index=False)
 
-    # 5. Print summary results to GitHub Actions logs
+    # 5. Print summary results
     print("\n--- Data Split Complete ---")
     print(f"Total original rows: {len(df)}")
     print(f"Valid agricultural payment responses: {len(df_filtered)}")
