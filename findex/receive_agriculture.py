@@ -4,7 +4,7 @@ import zipfile
 
 # Define zip and output file names
 zip_file = "findex_data.xlsx.zip"
-input_file = "findex_data.xlsx"
+input_file = "findex_data.xlsx.csv"
 output_account = "agriculture_into_account.xlsx"
 output_cash = "agriculture_in_cash.xlsx"
 
